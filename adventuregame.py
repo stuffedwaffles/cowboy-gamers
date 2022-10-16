@@ -30,7 +30,7 @@ def bedroom():
     inventory['bag'] = bag
     if "bedroom" not in teleport_list:
         teleport_list.append("bedroom")
-    available_locations = teleport(teleport, teleport_list)
+    available_locations = tp(teleport, teleport_list)
     while True:
         character_progresses[character_name] = [inventory, location, teleport, teleport_list]
         with open(r'stuf\actual projects\cowboy gamers\progress.txt', 'w') as file:
@@ -38,33 +38,34 @@ def bedroom():
         print()
         choice = input("> ")     
         print()
-        if "window" in choice:
-            print("You walk to the window, pushing it slightly. You find that the window opens easily, creaking as you open it fully. From what you can see, you are a couple floors off the ground. You can climb out of the window, but you may want to check other things in the room before you leave.")
-            print("Objects in the room you can check: table, bed, window, door")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), explore the room('explore'), or climb out the window('climb out').")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
-        elif "bed" in choice:
-            print("You look under the bed and find dust and a couple mice. They scurry into a hole. You get up, disappointed, and wipe the dust off of your pants.")
-            print("Objects in the room you can check: table, bed, window, door")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), or explore the room('explore').")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
-        elif "table" in choice:
-            print("You first bend to check under the table, where you see nothing but mice and dust. In the drawer, however, you find something a bit more exciting: a note and a flashlight. You keep both in your inventory.")
-            print("Objects in the room you can check: table, bed, window, door")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), or explore the room('explore').")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
-            inventory['note'] = note
-            inventory['flashlight'] = flashlight
-        elif "door" in choice:
-            print("You walk to the door, first trying the handle to see if it will open. Unfortunately, it doesn't. You feel a keyhole in the handle, meaning you might need to find a key to open the door. You peer inside the keyhole, and with the bit of light you have, you can make out some mechanisms inside- but they look a little bit suspicious. On the floor next to the door, you find a bowl of kidney beans. While they're barely cooked, you need food and they're your best bet.")
-            print("Objects in the room you can check: table, bed, window, door")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), or explore the room('explore').")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
-            inventory['kidney beans'] = beans
+        if "check" in choice:
+            if "window" in choice:
+                print("You walk to the window, pushing it slightly. You find that the window opens easily, creaking as you open it fully. From what you can see, you are a couple floors off the ground. You can climb out of the window, but you may want to check other things in the room before you leave.")
+                print("Objects in the room you can check: table, bed, window, door")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), explore the room('explore'), or climb out the window('climb out').")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+            elif "bed" in choice:
+                print("You look under the bed and find dust and a couple mice. They scurry into a hole. You get up, disappointed, and wipe the dust off of your pants.")
+                print("Objects in the room you can check: table, bed, window, door")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), or explore the room('explore').")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+            elif "table" in choice:
+                print("You first bend to check under the table, where you see nothing but mice and dust. In the drawer, however, you find something a bit more exciting: a note and a flashlight. You keep both in your inventory.")
+                print("Objects in the room you can check: table, bed, window, door")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), or explore the room('explore').")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+                inventory['note'] = note
+                inventory['flashlight'] = flashlight
+            elif "door" in choice:
+                print("You walk to the door, first trying the handle to see if it will open. Unfortunately, it doesn't. You feel a keyhole in the handle, meaning you might need to find a key to open the door. You peer inside the keyhole, and with the bit of light you have, you can make out some mechanisms inside- but they look a little bit suspicious. On the floor next to the door, you find a bowl of kidney beans. While they're barely cooked, you need food and they're your best bet.")
+                print("Objects in the room you can check: table, bed, window, door")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), check anything else in the room('check [item]'), or explore the room('explore').")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+                inventory['kidney beans'] = beans
         elif "explore" in choice:
             print("You walk around the room, feeling the walls and floor. Next to the door, mounted on the wall, there is a painting. The painting is fairly old, featuring the legendary Gray Rushin in his prime years. The painting doesn't seem related to this mysterious situation, but you never know. You lift it off the wall and feel something hidden in the backing. You find a key inside the old and now torn backing. As you continue to walk, you also find a water bottle and a rope, both of which you keep in your bag. The rope could be useful later in getting down from heights.")
             inventory['key'] = key
@@ -81,10 +82,10 @@ def bedroom():
         elif "climb out" in choice:
             print("You climb out the window, which is just big enough for you to fit through. As you stand up outside, you realize that you are on a ledge. The window swings shut behind you.")
             return 'ledge'
-        elif "/tp" in choice and teleport == True:
-            choice.replace("/tp", "")
-            print(f"teleporting to {choice}")
-            return choice
+        elif "/tp" in choice:
+            new_loc = choice.replace("/tp", "")
+            print(f"teleporting to {new_loc}")
+            return new_loc
         elif choice in inventory.keys():
             print(inventory[choice])
         elif 'items in bag' in choice:
@@ -105,11 +106,11 @@ def ledge():
     print("On the Ledge")
     print()
     print("You stand on a small ledge just outside the window, about 10 feet off the ground. You cannot figure out a way to open the window behind you. There are other ledges and small metal decorations on the side of the house.")
-    if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
     if "ledge" not in teleport_list:
         teleport_list.append("ledge")
-    available_locations = teleport(teleport, teleport_list)
+    available_locations = tp(teleport, teleport_list)
+    if teleport == True:
+                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
     if 'rope' in inventory.keys():
         inventory['rope'] = f"The rope is thick and frayed. You stretch it out and find that it is about 10 feet long, which is exactly what you need to get down the the ground. You throw one end to the ground and tie the other to a small decoration on the side of the building."
     else:
@@ -151,7 +152,7 @@ def outside():
     print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]')")
     if "outside" not in teleport_list:
         teleport_list.append("outside")
-    available_locations = teleport(teleport, teleport_list)
+    available_locations = tp(teleport, teleport_list)
 
     while True:
         character_progresses[character_name] = [inventory, location, teleport, teleport_list]
@@ -160,34 +161,34 @@ def outside():
         print()
         choice = input("> ")      
         print()
-        
-        if "house" in choice: 
-            print("You walk carefully around the house, checking the first floor windows. They are all closed and you can't see inside. You see everything that would be in a normal house: gutters, a small porch with a swing, a chimney. However, when you walk around the back of the house, you see something that none of the other houses have: a shed. Odd noises come from inside the shed, so you leave it alone for now. You circle back around the house, having found nothing too exciting. You could head down the road, but before doing so, make sure you have everything you need from the house.")
-            print("Objects you can check: shed, porch, house, road")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]')")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
-        elif "road" in choice:
-            print("You leave the house behind, walking towards the town square. The street is not very crowded, and cars occasionally drive past. People are looking at you weirdly, so you look down and realize that you are wearing old and now ripped pajamas, wearing a frayed backpack filled up with random objects, and holding an axe. You ignore the people looking at you and stuff the axe in your bag. As you approach the town square, you start to hear music and cheering. This is strange, since at home, there were no events or holidays coming up. It's almost like you're in a completely different universe. You shake off the thought and keep walking, approaching the town.")
-            return 'town square'
+        if "check" in choice:
+            if "house" in choice: 
+                print("You walk carefully around the house, checking the first floor windows. They are all closed and you can't see inside. You see everything that would be in a normal house: gutters, a small porch with a swing, a chimney. However, when you walk around the back of the house, you see something that none of the other houses have: a shed. Odd noises come from inside the shed, so you leave it alone for now. You circle back around the house, having found nothing too exciting. You could head down the road, but before doing so, make sure you have everything you need from the house.")
+                print("Objects you can check: shed, porch, house, road")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]')")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+            elif "road" in choice:
+                print("You leave the house behind, walking towards the town square. The street is not very crowded, and cars occasionally drive past. People are looking at you weirdly, so you look down and realize that you are wearing old and now ripped pajamas, wearing a frayed backpack filled up with random objects, and holding an axe. You ignore the people looking at you and stuff the axe in your bag. As you approach the town square, you start to hear music and cheering. This is strange, since at home, there were no events or holidays coming up. It's almost like you're in a completely different universe. You shake off the thought and keep walking, approaching the town.")
+                return 'town square'
 
-        elif "shed" in choice:
-            print("You head back to the shed. The noises get louder, and as you approach, you hear what could be the whining of an animal. You recognize the sounds as coming from a dog, although you don't know how. As you approach the shed, the noises get louder. The door however, is locked tightly shut by a three-digit lock. You may have something in your inventory to help you open it.")
-            print("Objects you can check: porch, house, road")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
-            if 'key' in inventory.keys():
-                inventory['key'] = "You take out the key, and realizing the shed lock is numbered, search for the number written on the back. You enter 257 into the numbered lock and are surprised to hear it click open."
+            elif "shed" in choice:
+                print("You head back to the shed. The noises get louder, and as you approach, you hear what could be the whining of an animal. You recognize the sounds as coming from a dog, although you don't know how. As you approach the shed, the noises get louder. The door however, is locked tightly shut by a three-digit lock. You may have something in your inventory to help you open it.")
+                print("Objects you can check: porch, house, road")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+                if 'key' in inventory.keys():
+                    inventory['key'] = "You take out the key, and realizing the shed lock is numbered, search for the number written on the back. You enter 257 into the numbered lock and are surprised to hear it click open."
 
-        elif "porch" in choice:
-            print("You head to the porch, gently climbing the stairs. As you reach to grab the handrail, it snaps under your touch and falls to the side. The noise echos through the neighborhood and people turn their heads, wondering what you are doing. On the porch, you see a swing that probably isn't safe to sit on. Under it, however, you find a note. The door is bolted shut and covered with planks of wood. A bowl of navy beans sits next to the door. You pick them up and add them to your inventory. You also add the note to your inventory.")
-            inventory['note 2'] = note2
-            inventory['navy beans'] = beans
-            print("Objects you can check: shed, house, road")
-            print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]")
-            if teleport == True:
-                print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+            elif "porch" in choice:
+                print("You head to the porch, gently climbing the stairs. As you reach to grab the handrail, it snaps under your touch and falls to the side. The noise echos through the neighborhood and people turn their heads, wondering what you are doing. On the porch, you see a swing that probably isn't safe to sit on. Under it, however, you find a note. The door is bolted shut and covered with planks of wood. A bowl of navy beans sits next to the door. You pick them up and add them to your inventory. You also add the note to your inventory.")
+                inventory['note 2'] = note2
+                inventory['navy beans'] = beans
+                print("Objects you can check: shed, house, road")
+                print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]")
+                if teleport == True:
+                    print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
         elif "key" in choice and inventory['key'] == "You take out the key, and realizing the shed lock is numbered, search for the number written on the back. You enter 257 into the numbered lock and are surprised to hear it click open.":
             print(inventory['key'])
             print("The shed door swings open with a sprinkle of wood chips and a loud creak. You see that the noise was indeed coming from a dog. A golden retriever, chained to a post in the shed, watches you as you slowly move inside the shed. The dog's tail wags slowly. It's fur is dirty but not yet matted, and it seems like the dog was recently fed. You have enough space to circle the dog and find an axe to cut it free. You cut the chain on the dog and keep the axe in your inventory.")
@@ -213,6 +214,10 @@ def outside():
             print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]")
             if teleport == True:
                 print(f"You can also teleport to {available_locations} by typing '/tp [location name]'.")
+        elif "/tp" in choice:
+            new_loc = choice.replace("/tp", "")
+            print(f"teleporting to {new_loc}")
+            return new_loc
         elif choice in inventory.keys():
             print(inventory[choice])
         elif 'items in bag' in choice:
@@ -220,6 +225,7 @@ def outside():
                 print(key_name)
             print()
             print("See the description of or use any of these items by typing the item name.")
+        
         elif "quit" in choice:
             return "quit"
         else:
@@ -234,9 +240,13 @@ def town_square():
     print("You can head towards any of the buildings or explore the carnival more. Both may hold information about the year or the location.")
     print("Objects you can check: clothes shop, motel, barber, pub, carnival")
     print("You can check the items in your bag('items in bag'), try using an item in your bag('[item name]'), or check an object around you('check [item]")
+    teleport = True
+    character_progresses[character_name] = [inventory, location, teleport, teleport_list]
+    with open(r'stuf\actual projects\cowboy gamers\progress.txt', 'w') as file:
+        file.write(str(character_progresses))   
     if "town square" not in teleport_list:
         teleport_list.append("town square")
-    available_locations = teleport(teleport, teleport_list)
+    available_locations = tp(teleport, teleport_list)
     while True:
         character_progresses[character_name] = [inventory, location, teleport, teleport_list]
         with open(r'stuf\actual projects\cowboy gamers\progress.txt', 'w') as file:
@@ -244,16 +254,21 @@ def town_square():
         print()
         choice = input("> ")     
         print()
-        if "clothes shop" in choice:
-            pass
-        elif "motel" in choice:
-            pass
-        elif "barber" in choice:
-            pass
-        elif "pub" in choice:
-            pass
-        elif "carnival" in choice:
-            pass
+        if "check" in choice:
+            if "clothes shop" in choice:
+                pass
+            elif "motel" in choice:
+                pass
+            elif "barber" in choice:
+                pass
+            elif "pub" in choice:
+                pass
+            elif "carnival" in choice:
+                pass
+        elif "/tp" in choice:
+            new_loc = choice.replace("/tp ", "")
+            print(f"teleporting to {new_loc}")
+            return new_loc
         elif choice in inventory.keys():
             print(inventory[choice])
         elif 'items in bag' in choice:
@@ -282,28 +297,11 @@ def game_over():
 
         
 #character!
-print("If you have played this game previously, please enter your old character name so we can retrieve your location and inventory.")
-character_name = input("Please enter a name for your character: ")
-with open(r'stuf\actual projects\cowboy gamers\progress.txt', 'r') as f:
-    file = f.read()
-    character_progresses = eval(file)
-print()
-
-#all objects
-bag = f"The bag is old and faded. It tears in some places as you lift it and examine it. You don't find anything unusual."
-note = f"You take the note out of your pocket and read it. It reads: \nDear {character_name}, \n    Welcome to my lovely home! I think you'll find it quite comforting. \n    If you hadn't noticed, the door is locked. There is a key in this room, but be careful! \n    Theres also a couple booby traps! Your goal? Escape! \n    Good luck, my friend!"
-note2 = f"    I see you escaped, {character_name}! You're quite clever, but you won't last long here. \n    Nobody in this town will last much longer, considering my plans for it. \n    Well, enjoy the time you have left!"
-flashlight = f"You examine the black flashlight, turning it on with the flip of a switch on the back. The beam of light flickers, as if the batteries are about to die. You turn it off and put it away."
-beans = f"You look at the beans, seeing that they are cold, slightly cooked, and damp. You take a bite, frowing at the taste. While these beans aren't filling nor good-tasting for you, they might be appetizing to an animal or other person."
-key = f"The key is dusty and cold. As you turn it over in your hands, you feel engravings on the surface. There are three numbers- 257. They don't seem to be of much use here. The key, however, could open something."
-water = f"You check the water. It seems clean, which is reassuring."
-rope = f"The rope is thick and frayed. You stretch it out and find that it is about 10 feet long. It might be useful to get down from somewhere."
-dog = f"Beans is a dusty medium sized golden retriever and has given you his loyalty due to you giving him beans. Beans watches you, with his tongue sticking out to one side and his tail wagging. As you pat him on the head, he shakes off a layer of dust and happily trots around your legs."
 
 
-def teleport(teleport, teleport_list):
+def tp(teleport, teleport_list):
     if teleport == True:
-        print("You can now teleport to places you have been. To do this, write 'tp [location name]. Available locations: bedroom, ledge, outside, town square")
+        print("You can now teleport to places you have been. To do this, write '/tp [location name]. Available locations: bedroom, ledge, outside, town square")
         available_locations = ", ".join(teleport_list)
         print(f"Available locations for you to teleport: {available_locations}")
         return available_locations
@@ -313,6 +311,12 @@ def teleport(teleport, teleport_list):
 
 
 while True:
+    print("If you have played this game previously, please enter your old character name so we can retrieve your location and inventory.")
+    character_name = input("Please enter a name for your character: ")
+    with open(r'stuf\actual projects\cowboy gamers\progress.txt', 'r') as f:
+        file = f.read()
+        character_progresses = eval(file)
+    print()
     if character_name in character_progresses.keys():
         location = character_progresses[character_name][1]#location = the second thing in the list which is location name
         inventory = character_progresses[character_name][0]
@@ -344,39 +348,61 @@ while True:
         teleport_list = []          
         character_progresses[character_name] = [inventory, location]
     
+
+
     opening()
     print("hit enter to start")
     start = input("> ")
     print()
-
-    if location == 'bedroom':
-        location = bedroom()
-    if location == "ledge":
-        location = ledge()
-    if location == "outside":
-        location = outside()
-    if location == "town square":
-        location = town_square()
-
-
+    while True:
+        if location == 'bedroom':
+            location = bedroom()
+        if location == "ledge":
+            location = ledge()
+        if location == "outside":
+            location = outside()
+        if location == "town square":
+            location = town_square()
 
 
-    elif location == "quit":
-        character_progresses[character_name] = [inventory, location, teleport, teleport_list]
-        with open('stuf\cowboy gamers\progress.txt', 'w') as file:
-            file.write(str(character_progresses))   
-        break
 
-    elif location == 'game over':
-            yes_or_no = game_over()
-            if yes_or_no == 'y':
-                continue
-            else:
+
+        elif location == "quit":
+            character_progresses[character_name] = [inventory, location, teleport, teleport_list]
+            with open('stuf\cowboy gamers\progress.txt', 'w') as file:
+                file.write(str(character_progresses))   
+            break
+
+        elif location == 'game over':
                 break
+
+    while True:
+        yes_or_no = game_over()
+        if yes_or_no == "y" or yes_or_no == "n":
+            break
+        else:
+            print("Please enter a valid answer!")
+            continue
+
+    if yes_or_no == 'y':
+        continue
+    elif yes_or_no == "n":
+        break
     
             
             
-            
+#all objects
+bag = f"The bag is old and faded. It tears in some places as you lift it and examine it. You don't find anything unusual."
+note = f"You take the note out of your pocket and read it. It reads: \nDear {character_name}, \n    Welcome to my lovely home! I think you'll find it quite comforting. \n    If you hadn't noticed, the door is locked. There is a key in this room, but be careful! \n    Theres also a couple booby traps! Your goal? Escape! \n    Good luck, my friend!"
+note2 = f"    I see you escaped, {character_name}! You're quite clever, but you won't last long here. \n    Nobody in this town will last much longer, considering my plans for it. \n    Well, enjoy the time you have left!"
+flashlight = f"You examine the black flashlight, turning it on with the flip of a switch on the back. The beam of light flickers, as if the batteries are about to die. You turn it off and put it away."
+beans = f"You look at the beans, seeing that they are cold, slightly cooked, and damp. You take a bite, frowing at the taste. While these beans aren't filling nor good-tasting for you, they might be appetizing to an animal or other person."
+key = f"The key is dusty and cold. As you turn it over in your hands, you feel engravings on the surface. There are three numbers- 257. They don't seem to be of much use here. The key could be useful in opening a door."
+water = f"You check the water. It seems clean, which is reassuring."
+rope = f"The rope is thick and frayed. You stretch it out and find that it is about 10 feet long. It might be useful to get down from somewhere."
+dog = f"Beans is a dusty medium sized golden retriever and has given you his loyalty in exchange for beans. He watches you, with his tongue sticking out to one side and his tail wagging. As you pat Beans on the head, he shakes a layer of dust out of his fur and happily trots around your legs."
+
+  
             
         
         
